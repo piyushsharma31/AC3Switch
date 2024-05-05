@@ -90,7 +90,8 @@ void loop() {
 
 		if (udpPacket._command == DEVICE_COMMAND_DISCOVER) {
 
-			replyBufferSize = 3 + configuration.discover(replyBuffer+3);
+			//replyBufferSize = 3 + configuration.discover(replyBuffer+3);
+      replyBufferSize += configuration.toByteArray(replyBuffer+replyBufferSize);
 
 		} else if (udpPacket._command == DEVICE_COMMAND_SET_CONFIGURATION) {
 
@@ -101,18 +102,21 @@ void loop() {
 			byte _pin = udpPacket._payload[0];
 			if (_pin == sswitch1.pin) {
 
-				memcpy(replyBuffer + 3, sswitch1.toByteArray(), sswitch1.sizeOfUDPPayload());
-				replyBufferSize = 3 + sswitch1.sizeOfUDPPayload();
+				//memcpy(replyBuffer + 3, sswitch1.toByteArray(), sswitch1.sizeOfUDPPayload());
+				//replyBufferSize = 3 + sswitch1.sizeOfUDPPayload();
+        replyBufferSize += sswitch1.toByteArray(replyBuffer + replyBufferSize);
 
 			} else if (_pin == sswitch2.pin) {
 
-				memcpy(replyBuffer + 3, sswitch2.toByteArray(), sswitch2.sizeOfUDPPayload());
-				replyBufferSize = 3 + sswitch2.sizeOfUDPPayload();
+				//memcpy(replyBuffer + 3, sswitch2.toByteArray(), sswitch2.sizeOfUDPPayload());
+				//replyBufferSize = 3 + sswitch2.sizeOfUDPPayload();
+        replyBufferSize += sswitch2.toByteArray(replyBuffer + replyBufferSize);
 
 			} else if (_pin == sswitch3.pin) {
 
-				memcpy(replyBuffer + 3, sswitch3.toByteArray(), sswitch3.sizeOfUDPPayload());
-				replyBufferSize = 3 + sswitch3.sizeOfUDPPayload();
+				//memcpy(replyBuffer + 3, sswitch3.toByteArray(), sswitch3.sizeOfUDPPayload());
+				//replyBufferSize = 3 + sswitch3.sizeOfUDPPayload();
+        replyBufferSize += sswitch3.toByteArray(replyBuffer + replyBufferSize);
 
 			}
 
@@ -139,11 +143,14 @@ void loop() {
 
 		} else if (udpPacket._command == DEVICE_COMMAND_GETALL_CONTROLLER) {
 
-			memcpy(replyBuffer + 3, sswitch1.toByteArray(), sswitch1.sizeOfUDPPayload());
-			memcpy(replyBuffer + 3 + sswitch1.sizeOfUDPPayload(), sswitch2.toByteArray(), sswitch2.sizeOfUDPPayload());
-			memcpy(replyBuffer + 3 + sswitch1.sizeOfUDPPayload() + sswitch3.sizeOfUDPPayload(), sswitch3.toByteArray(), sswitch3.sizeOfUDPPayload());
+			//memcpy(replyBuffer + 3, sswitch1.toByteArray(), sswitch1.sizeOfUDPPayload());
+			//memcpy(replyBuffer + 3 + sswitch1.sizeOfUDPPayload(), sswitch2.toByteArray(), sswitch2.sizeOfUDPPayload());
+			//memcpy(replyBuffer + 3 + sswitch1.sizeOfUDPPayload() + sswitch3.sizeOfUDPPayload(), sswitch3.toByteArray(), sswitch3.sizeOfUDPPayload());
 
-			replyBufferSize = 3 + sswitch1.sizeOfUDPPayload() + sswitch2.sizeOfUDPPayload() + sswitch3.sizeOfUDPPayload();
+			//replyBufferSize = 3 + sswitch1.sizeOfUDPPayload() + sswitch2.sizeOfUDPPayload() + sswitch3.sizeOfUDPPayload();
+      replyBufferSize += sswitch1.toByteArray(replyBuffer + replyBufferSize);
+      replyBufferSize += sswitch2.toByteArray(replyBuffer + replyBufferSize);
+      replyBufferSize += sswitch3.toByteArray(replyBuffer + replyBufferSize);
 
 		} else if (udpPacket._command == DEVICE_COMMAND_SETALL_CONTROLLER) {
 

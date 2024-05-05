@@ -11,7 +11,7 @@ short __ON = LOW;
 short __OFF = HIGH;
 
 public:
-	ACSwitch(char* nam, uint8_t _pin, uint8_t capCount, int start_address):ESP8266Controller(nam, _pin, capCount, start_address)
+	ACSwitch(const char* nam, uint8_t _pin, uint8_t capCount, int start_address):ESP8266Controller(nam, _pin, capCount, start_address)
 	{
 
 		pinMode(pin, OUTPUT);
